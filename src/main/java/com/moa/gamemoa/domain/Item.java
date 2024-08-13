@@ -15,7 +15,7 @@ import java.util.List;
 public class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "itme_id")
+    @Column(name = "item_id")
     private Long id;
 
     private String name;
@@ -29,5 +29,12 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<CategoryItem> categoryItems = new ArrayList<>();
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<Like> likes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "item")
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "item")
+    private List<Inquiry> inquiries = new ArrayList<>();
 }
