@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
@@ -22,7 +23,20 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    public void setOrder(Order order) {
-        this.order = order;
+    private int orderPrice;
+
+    private int count;
+
+    // 생성 메서드
+
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.reduceStock(count);
+
+        return orderItem;
     }
 }
