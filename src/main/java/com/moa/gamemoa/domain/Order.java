@@ -47,17 +47,17 @@ public class Order {
     }
 
     // 연관 관계 메서드
-    public void setMember(Member member) {
+    private void setMember(Member member) {
         this.member = member;
         member.getOrders().add(this);
     }
 
-    public void setDelivery(Delivery delivery) {
+    private void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
     }
 
-    public void addOrderItem(OrderItem orderItem) {
+    private void addOrderItem(OrderItem orderItem) {
         this.orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
