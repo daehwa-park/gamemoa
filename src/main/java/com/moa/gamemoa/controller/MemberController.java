@@ -1,6 +1,9 @@
 package com.moa.gamemoa.controller;
 
+import com.moa.gamemoa.domain.Member;
+import com.moa.gamemoa.dto.member.MemberDataChangeRequestDto;
 import com.moa.gamemoa.dto.member.MemberNewRequestDto;
+import com.moa.gamemoa.dto.member.MemberPassChangeRequestDto;
 import com.moa.gamemoa.dto.member.MemberResponseDto;
 import com.moa.gamemoa.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +33,23 @@ public class MemberController {
                 .body(memberId);
     }
 
+    @PatchMapping("/pass")
+    public ResponseEntity<Long> passChange(@RequestBody MemberPassChangeRequestDto request) {
+        memberService.updatePass(request);
 
+        MemberResponseDto member = memberService.findMember(request.getMemberId());
+
+        return ResponseEntity.ok()
+                .body(member.getMemberId());
+    }
+
+    @PutMapping
+    public ResponseEntity<Long> dataChange(@RequestBody MemberDataChangeRequestDto request) {
+        memberService.updateMember(request);
+
+        MemberResponseDto member = memberService.findMember(request.getMemberId());
+        return ResponseEntity.ok()
+                .body(member.getMemberId());
+    }
 
 }

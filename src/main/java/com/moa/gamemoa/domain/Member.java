@@ -72,16 +72,28 @@ public class Member {
     }
 
     //생성 메서드
-    public static Member createMember(MemberNewRequestDto request) {
+    public static Member createMember(String userId, String userPass, String userName, String nickname, String phone, String address) {
         Member member = new Member();
-        member.setUserId(request.getUserId());
-        member.setUserPass(request.getUserPass());
-        member.setUserName(request.getUserName());
-        member.setNickname(request.getNickname());
-        member.setPhone(request.getPhone());
-        member.setAddress(request.getAddress());
+        member.setUserId(userId);
+        member.setUserPass(userPass);
+        member.setUserName(userName);
+        member.setNickname(nickname);
+        member.setPhone(phone);
+        member.setAddress(address);
 
         return member;
+    }
+
+    //비즈니스 로직
+    public void updatePass(String userPass) {
+        this.setUserPass(userPass);
+    }
+
+    public void updateMember(String userName, String nickname, String address, String phone) {
+        this.setUserName(userName);
+        this.setNickname(nickname);
+        this.setAddress(address);
+        this.setPhone(phone);
     }
 
 }
